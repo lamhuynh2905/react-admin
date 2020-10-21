@@ -89,8 +89,11 @@ export default (
         const query = {
             filter: JSON.stringify({ id: params.ids }),
         };
-        const url = `${apiUrl}/${resource}?${stringify(query)}`;
-        return httpClient(url).then(({ json }) => ({ data: json }));
+        const url = `${apiUrl}/${resource}`;
+        return httpClient(url,  {
+            method: 'PUT',
+            body: JSON.stringify(query)
+        }).then(({ json }) => ({ data: json }));
     },
 
     getManyReference: (resource, params) => {
